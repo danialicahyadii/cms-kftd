@@ -14,10 +14,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(remove: [
-            StartSession::class,
-            ShareErrorsFromSession::class,
-            ValidateCsrfToken::class,
+        $middleware->web(append: [
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            \RealRashid\SweetAlert\ToSweetAlert::class,
+        ]);
+
+        // $middleware->web(remove: [
+        //     StartSession::class,
+        //     ShareErrorsFromSession::class,
+        //     ValidateCsrfToken::class,
+        // ]);
+        $middleware->alias([
+            'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -19,18 +19,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <div class="section-header-back">
-                    <a href="{{ url()->previous() }}"
-                        class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <h1>Edit Award</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Posts</a></div>
-                    <div class="breadcrumb-item">Edit Award</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-edit')
+
 
             <div class="section-body">
                 <h2 class="section-title">Edit Award</h2>
@@ -45,59 +35,64 @@
                                 <h4>Write Your Post</h4>
                             </div>
                             <div class="card-body">
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Award</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control" value="{{ $award->nama_award }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Award English</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control" value="{{ $award->nama_award_en }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image Award</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div id="image-preview"
-                                            class="image-preview">
-                                            <label for="image-upload"
-                                                id="image-label">Choose File</label>
-                                            <input type="file"
-                                                name="image"
-                                                id="image-upload" />
+                                <form action="{{ route('award.update', $award->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Award</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="nama_award" value="{{ $award->nama_award }}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image Award Show</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div id="image-preview"
-                                            class="image-preview">
-                                            <label for="image-upload"
-                                                id="image-label">Choose File</label>
-                                            <input type="file"
-                                                name="image"
-                                                id="image-upload" />
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Award English</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="nama_award_en" value="{{ $award->nama_award_en }}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Award</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                        class="form-control datepicker">
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image Award</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div id="image-preview"
+                                                class="image-preview" style="background-image: url('{{ asset('storage/' . $award->image_award) }}');
+                                                background-size: cover; background-position: center center;">
+                                                <label for="image-upload"
+                                                    id="image-label">Choose File</label>
+                                                <input type="file"
+                                                    name="image"
+                                                    id="image-upload" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-primary">Create Post</button>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image Award Show</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div id="image-preview-award-show"
+                                                class="image-preview" style="background-image: url('{{ asset('storage/' . $award->image_award_show) }}');
+                                                background-size: cover; background-position: center center;">
+                                                <label for="image-upload"
+                                                    id="image-label-award-show">Choose File</label>
+                                                <input type="file" name="image_award_show"
+                                                    id="image-upload-award-show" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Award</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                            class="form-control datepicker" name="date_award" value="{{ $award->date_award }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button class="btn btn-primary" type="submit">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -109,6 +104,7 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>

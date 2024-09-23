@@ -8,9 +8,9 @@
         </div>
         <ul class="sidebar-menu mt-4">
             <li class="menu-header">Dashboard</li>
-            <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+            <li class="{{ Request::is('/') ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="{{ url('dashboard') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
+                    href="{{ url('/') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Main Menu</li>
             <li class="{{ Request::is('*award*') ? 'active' : '' }}">

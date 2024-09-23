@@ -11,4 +11,10 @@ class Branch extends Model
 
     protected $table = 'branch';
 
+    protected $guarded = [];
+
+    protected $primaryKey = 'soffice';
+
+    public $timestamps = false;
+
 }

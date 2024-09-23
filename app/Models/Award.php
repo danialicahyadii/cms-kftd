@@ -10,4 +10,7 @@ class Award extends Model
     use HasFactory;
 
     protected $table = 'award';
+
+    protected $guarded = [];
+    public $timestamps = false;
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AwardResource;
 use App\Models\Award;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AwardController extends Controller
 {
@@ -13,9 +14,9 @@ class AwardController extends Controller
      */
     public function index()
     {
-        $award = Award::paginate(10);
-        // return view('apps.award.index', ['type_menu' => 'Award', 'award' => $award]);
-        return new AwardResource(true, 'Data Award', $award);
+        $award = Award::orderBy('id', 'desc')->paginate(10);
+        confirmDelete('Delete Award!', "Are you sure you want to delete?");
+        return view('apps.award.index', ['type_menu' => 'Award', 'award' => $award]);
     }
 
     /**
@@ -31,19 +32,22 @@ class AwardController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->image_award ?? null;
+        $imageAward = $request->image_award ?? null;
+        $imageAwardShow = $request->image_award_show ?? null;
 
-        if($image){
-            // dd(true);
+        if($imageAward){
+            $imageAwardPath = $request->file('image_award')->store('awards', 'public');
         }
-        // dd(false);
-        // Award::create([
-        //     'nama_award' => $request->nama_award,
-        //     'nama_award_en' => $request->nama_award_en,
-        //     'image_award' => $request->file('image_award')->getClientOriginalName(),
-        //     'image_award_show' => $request->file('image_award_show')->getClientOriginalName(),
-        //     'date_award' => $request->date_award,
-        // ]);
+        if($imageAwardShow){
+            $imageAwardShowPath = $request->file('image_award_show')->store('awards', 'public');
+        }
+        Award::create([
+            'nama_award' => $request->nama_award,
+            'nama_award_en' => $request->nama_award_en,
+            'image_award' => $imageAwardPath ?? 'null',
+            'image_award_show' => $imageAwardShowPath ?? 'null',
+            'date_award' => $request->date_award,
+        ]);
         return redirect()->route('award.index');
     }
 
@@ -68,7 +72,34 @@ class AwardController extends Controller
      */
     public function update(Request $request, Award $award)
     {
-        //
+        $imageAwardPath = $award->image_award;
+        $imageAwardShowPath = $award->image_award_show;
+
+        if ($request->hasFile('image')) {
+            if ($award->image_award && Storage::disk('public')->exists($award->image_award)) {
+                Storage::disk('public')->delete($award->image_award);
+            }
+            $imageAwardPath = $request->file('image')->store('awards', 'public');
+        }
+
+        if ($request->hasFile('image_award_show')) {
+            if ($award->image_award_show && Storage::disk('public')->exists($award->image_award_show)) {
+                Storage::disk('public')->delete($award->image_award_show);
+            }
+            $imageAwardShowPath = $request->file('image_award_show')->store('awards', 'public');
+        }
+
+        // dd($imageAwardPath, $imageAwardShowPath, $request->all());
+
+        $award->update([
+            'nama_award' => $request->nama_award ?? $award->nama_award,
+            'nama_award_en' => $request->nama_award_en ?? $award->nama_award_en,
+            'image_award' => $imageAwardPath,
+            'image_award_show' => $imageAwardShowPath,
+            'date_award' => $request->date_award ?? $award->date_award
+        ]);
+
+        return redirect()->route('award.index');
     }
 
     /**
@@ -76,6 +107,8 @@ class AwardController extends Controller
      */
     public function destroy(Award $award)
     {
-        //
+        $award->delete();
+        toast($award->nama_award.' was deleted!','success');
+        return back();
     }
 }

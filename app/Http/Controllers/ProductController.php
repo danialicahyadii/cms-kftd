@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
+use App\Models\Principal;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('apps.product.index', ['type_menu' => 'product']);
+        $product = Product::paginate(10);
+        confirmDelete('Delete Product!', "Are you sure you want to delete?");
+        return view('apps.product.index', ['type_menu' => 'product', 'product' => $product]);
     }
 
     /**
@@ -20,7 +24,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('apps.product.create', ['type_menu' => 'product']);
+        $principal = Principal::get();
+        $linis = Categories::get();
+
+        return view('apps.product.create', ['type_menu' => 'product', 'principal' => $principal, 'linis' => $linis]);
     }
 
     /**
@@ -28,7 +35,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        Product::create($request->all());
+
+        return redirect('product');
     }
 
     /**
@@ -44,7 +54,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $principal = Principal::get();
+        $linis = Categories::get();
+
+        return view('apps.product.edit', ['type_menu' => 'product', 'product' => $product, 'principal' => $principal, 'linis' => $linis]);
     }
 
     /**
@@ -52,7 +65,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+        return redirect('product');
     }
 
     /**
@@ -60,6 +75,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        toast($product->name.' was deleted!','success');
+        return redirect('product');
     }
 }

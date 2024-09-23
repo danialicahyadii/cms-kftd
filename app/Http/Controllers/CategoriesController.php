@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use Illuminate\Http\Request;
+Use Alert;
 
 class CategoriesController extends Controller
 {
@@ -13,6 +14,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Categories::paginate(10);
+
+        confirmDelete('Delete Categories!', "Are you sure you want to delete?");
+
         return view('apps.categories.index', ['type_menu' => 'categories', 'categories' => $categories]);
     }
 
@@ -29,7 +33,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Categories::create($request->all());
+
+        toast($request->name.' was created!','success');
+
+        return redirect('categories');
     }
 
     /**
@@ -43,24 +51,32 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categories $categories)
+    public function edit($id)
     {
-        return view('apps.categories.edit', ['type_menu' => 'categories']);
+        $categories = Categories::find($id);
+        return view('apps.categories.edit', ['type_menu' => 'categories', 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, $id)
     {
-        //
+
+        $categories = Categories::find($id);
+        $categories->update($request->all());
+
+        return redirect('categories');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy($id)
     {
-        //
+        $categories = Categories::find($id);
+        $categories->delete();
+        toast($categories->name.' was deleted!','success');
+        return redirect('categories');
     }
 }

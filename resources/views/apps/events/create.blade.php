@@ -15,18 +15,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <div class="section-header-back">
-                    <a href="{{ url()->previous() }}"
-                        class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <h1>Create New Post</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Posts</a></div>
-                    <div class="breadcrumb-item">Create New Post</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-create')
+
 
             <div class="section-body">
                 <h2 class="section-title">Create New Post</h2>
@@ -41,65 +31,108 @@
                                 <h4>Write Your Post</h4>
                             </div>
                             <div class="card-body">
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric">
-                                            <option>Tech</option>
-                                            <option>News</option>
-                                            <option>Political</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <textarea class="summernote-simple"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div id="image-preview"
-                                            class="image-preview">
-                                            <label for="image-upload"
-                                                id="image-label">Choose File</label>
-                                            <input type="file"
-                                                name="image"
-                                                id="image-upload" />
+                                <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('POST')
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="title">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control inputtags">
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title En</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="title_en">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric">
-                                            <option>Publish</option>
-                                            <option>Draft</option>
-                                            <option>Pending</option>
-                                        </select>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="slug">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-primary">Create Post</button>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug En</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="slug_en">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="summernote-simple" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description En</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="summernote-simple" name="description_en"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Place</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="place">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div id="image-preview"
+                                                class="image-preview">
+                                                <label for="image-upload"
+                                                    id="image-label">Choose File</label>
+                                                <input type="file"
+                                                    name="image"
+                                                    id="image-upload" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Title</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="meta_title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Keywords</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control inputtags" name="meta_keywords">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Description</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="summernote-simple" name="meta_description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Start Events</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="datetime-local" name="start_event" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">End Events</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="datetime-local" name="end_event" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button class="btn btn-primary" type="submit">Create {{ ucwords($type_menu) }}</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

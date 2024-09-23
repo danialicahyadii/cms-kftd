@@ -19,18 +19,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <div class="section-header-back">
-                    <a href="{{ url()->previous() }}"
-                        class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <h1>Create New {{ $type_menu }}</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ url('award') }}">{{ $type_menu }}</a></div>
-                    <div class="breadcrumb-item">Create New {{ $type_menu }}</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-create')
+
 
             <div class="section-body">
                 <h2 class="section-title">Create New {{ $type_menu }}</h2>
@@ -72,6 +62,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image Award Show</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div id="image-preview-award-show"
+                                                class="image-preview">
+                                                <label for="image-upload"
+                                                    id="image-label-award-show">Choose File</label>
+                                                <input type="file" name="image_award_show"
+                                                    id="image-upload-award-show" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Award</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text" name="date_award"
@@ -96,6 +98,7 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>

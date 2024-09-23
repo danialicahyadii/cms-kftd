@@ -11,18 +11,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>{{ ucwords($type_menu) }}</h1>
-                <div class="section-header-button">
-                    <a href="{{ route($type_menu.'.create') }}"
-                        class="btn btn-primary">Add New</a>
-                </div>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">{{ ucwords($type_menu) }}</a></div>
-                    <div class="breadcrumb-item">All {{ ucwords($type_menu) }}</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-index')
+
             <div class="section-body">
                 <h2 class="section-title">{{ ucwords($type_menu) }}</h2>
                 <p class="section-lead">
@@ -37,12 +27,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
-                                    <select class="form-control selectric">
-                                        <option>Action For Selected</option>
-                                        <option>Move to Draft</option>
-                                        <option>Move to Pending</option>
-                                        <option>Delete Pemanently</option>
-                                    </select>
+                                    <a href="{{ route($type_menu.'.create') }}"
+                        class="btn btn-primary">Add New</a>
                                 </div>
                                 <div class="float-right">
                                     <form>
@@ -90,12 +76,9 @@
                                                 </td>
                                                 <td>{{ $row->name }}
                                                     <div class="table-links">
-                                                        <a href="#">View</a>
+                                                        <a href="{{ route('categories.edit', $row->id) }}">Edit</a>
                                                         <div class="bullet"></div>
-                                                        <a href="#">Edit</a>
-                                                        <div class="bullet"></div>
-                                                        <a href="#"
-                                                            class="text-danger">Trash</a>
+                                                        <a href="{{ route('categories.destroy', $row->id) }}" class="text-danger" data-confirm-delete="true">Delete</a>
                                                     </div>
                                                 </td>
                                                 <td>{{ $row->created_at }}</td>

@@ -11,7 +11,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard-general-dashboard', ['type_menu' => 'Dashboard']);
+        return view('apps.adash.dash', ['type_menu' => 'Dashboard']);
     }
 
     /**

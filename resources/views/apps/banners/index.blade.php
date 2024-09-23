@@ -11,18 +11,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>{{ $type_menu }}</h1>
-                <div class="section-header-button">
-                    <a href="{{ route('banners.create') }}"
-                        class="btn btn-primary">Add New</a>
-                </div>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">{{ $type_menu }}</a></div>
-                    <div class="breadcrumb-item">All {{ $type_menu }}</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-index')
+
             <div class="section-body">
                 <h2 class="section-title">{{ $type_menu }}</h2>
                 <p class="section-lead">
@@ -37,12 +27,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
-                                    <select class="form-control selectric">
-                                        <option>Action For Selected</option>
-                                        <option>Move to Draft</option>
-                                        <option>Move to Pending</option>
-                                        <option>Delete Pemanently</option>
-                                    </select>
+                                    <a href="{{ route('banners.create') }}"
+                                        class="btn btn-primary">Add New</a>
                                 </div>
                                 <div class="float-right">
                                     <form>
@@ -93,21 +79,16 @@
                                                 </td>
                                                 <td>{{ $row->big_title }}
                                                     <div class="table-links">
-                                                        <a href="#">View</a>
+                                                        <a href="{{ route('banners.edit', $row->id) }}">Edit</a>
                                                         <div class="bullet"></div>
-                                                        <a href="{{ route('banners.edit', 1) }}">Edit</a>
-                                                        <div class="bullet"></div>
-                                                        <a href="#"
-                                                            class="text-danger">Trash</a>
+                                                        <a href="{{ route('banners.destroy', $row->id) }}" class="text-danger" data-confirm-delete="true">Delete</a>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     {{ $row->small_title }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ $row->image_url }}" target="_blank">
-                                                        <img alt="image" class="mr-3 rounded" width="100" height="50" src="{{ $row->image_url }}">
-                                                    </a>
+                                                    <img alt="image" class="mr-3 rounded show-link" style="cursor: pointer;" width="100" height="50" src="{{ $row->image_url }}">
                                                 </td>
                                                 <td>
                                                     <a href="#">

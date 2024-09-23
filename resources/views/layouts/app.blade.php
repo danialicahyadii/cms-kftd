@@ -25,6 +25,7 @@
     <link rel="stylesheet"
         href="{{ asset('css/components.css') }}">
 
+
     <!-- Start GA -->
     <script async
         src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -43,6 +44,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div id="app">
         <div class="main-wrapper">
             <!-- Header -->
@@ -72,6 +74,29 @@
     <!-- Template JS File -->
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+        // document.addEventListener('contextmenu', function(e) {
+        //     e.preventDefault(); // Mencegah klik kanan
+        // });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.show-link').on('click', function(e){
+                var src = $(this).attr('src');
+                console.log(src);
+                Swal.fire({
+                    title: false,
+                    text: false,
+                    imageUrl: src,
+                    imageWidth: false,
+                    imageHeight: false,
+                    showConfirmButton: false,
+                    });
+
+            })
+        });
+    </script>
 </body>
 
 </html>

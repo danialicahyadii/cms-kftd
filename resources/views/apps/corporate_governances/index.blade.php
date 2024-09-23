@@ -11,14 +11,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>{{ ucwords($type_menu) }}</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">{{ ucwords($type_menu) }}</a></div>
-                    <div class="breadcrumb-item">All {{ ucwords($type_menu) }}</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-index')
+
             <div class="section-body">
                 <h2 class="section-title">{{ ucwords($type_menu) }}</h2>
                 <p class="section-lead">
@@ -67,10 +61,9 @@
                                                 </div>
                                             </th>
                                             <th>Title</th>
-                                            <th>File</th>
                                             <th>Author</th>
+                                            <th>File</th>
                                             <th>Created At</th>
-                                            <th>Status</th>
                                         </tr>
                                         @foreach ($corporateGovernances as $row)
                                             <tr>
@@ -86,32 +79,17 @@
                                                 </td>
                                                 <td>{{ $row->title }}
                                                     <div class="table-links">
-                                                        <a href="#">View</a>
+                                                        <a href="{{ route('corporate-governances.edit', $row->id) }}">Edit</a>
                                                         <div class="bullet"></div>
-                                                        <a href="#">Edit</a>
-                                                        <div class="bullet"></div>
-                                                        <a href="#"
-                                                            class="text-danger">Trash</a>
+                                                        <a href="{{ route('corporate-governances.destroy', $row->id) }}"
+                                                            class="text-danger" data-confirm-delete="true">Trash</a>
                                                     </div>
                                                 </td>
+                                                <td>{{ $row->title_en }}</td>
                                                 <td>
                                                     <a href="{{ $row->file_link }}" target="_blank">{{ $row->filename }}</a>
                                                 </td>
-                                                <td>
-                                                    <a href="#">
-                                                        <img alt="image"
-                                                            src="{{ asset('img/avatar/avatar-5.png') }}"
-                                                            class="rounded-circle"
-                                                            width="35"
-                                                            data-toggle="title"
-                                                            title="">
-                                                        <div class="d-inline-block ml-1">Rizal Fakhri</div>
-                                                    </a>
-                                                </td>
-                                                <td>2018-01-20</td>
-                                                <td>
-                                                    <div class="badge badge-primary">Published</div>
-                                                </td>
+                                                <td>{{ $row->created_at->format('Y-m-d') }}</td>
                                             </tr>
                                         @endforeach
                                     </table>

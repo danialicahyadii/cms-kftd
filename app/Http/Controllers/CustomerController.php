@@ -13,6 +13,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Customer::paginate(10);
+        confirmDelete('Delete Customer!', "Are you sure you want to delete?");
+
         return view('apps.customer.index', ['type_menu' => 'customer', 'customer' => $customer]);
     }
 
@@ -29,7 +31,22 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image = $request->image ?? null;
+
+        $lastId = Customer::latest('id')->value(column: 'id') ?? 0;
+        $id = $lastId + 1;
+
+        if($request->hasFile('image')){
+            $image = $id.'. '.$request->image->getClientOriginalName();
+            $request->image->storeAs('customer', $image, 'public');
+        }
+        Customer::create([
+            'name_customer' => $request->name_customer,
+            'category' => $request->category,
+            'image' => $image,
+        ]);
+
+        return redirect('customer');
     }
 
     /**
@@ -45,7 +62,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('apps.customer.edit', ['type_menu' => 'customer', 'customer' => $customer]);
     }
 
     /**
@@ -53,7 +70,18 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        if($request->hasFile('image')){
+            $image = $customer->id.'. '.$request->image->getClientOriginalName();
+            $request->image->storeAs('customer', $image, 'public');
+        }
+
+        $customer->update([
+           'name_customer' => $request->name_customer,
+           'category' => $request->category,
+           'image' => $image ?? $customer->image,
+        ]);
+
+        return redirect('customer');
     }
 
     /**
@@ -61,6 +89,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        toast($customer->name_customer.' was deleted!','success');
+
+        return redirect('customer');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+    @extends('layouts.app')
 
 @section('title', 'Edit New Post')
 
@@ -15,18 +15,7 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <div class="section-header-back">
-                    <a href="{{ url()->previous() }}"
-                        class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <h1>Create New Post</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Posts</a></div>
-                    <div class="breadcrumb-item">Create New Post</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-edit')
 
             <div class="section-body">
                 <h2 class="section-title">Create New Post</h2>
@@ -41,65 +30,77 @@
                                 <h4>Write Your Post</h4>
                             </div>
                             <div class="card-body">
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric">
-                                            <option>Tech</option>
-                                            <option>News</option>
-                                            <option>Political</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <textarea class="summernote-simple"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div id="image-preview"
-                                            class="image-preview">
-                                            <label for="image-upload"
-                                                id="image-label">Choose File</label>
-                                            <input type="file"
-                                                name="image"
-                                                id="image-upload" />
+                                <form action="{{ route('staffs.update', $staffs->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="name" value="{{ $staffs->name }}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text"
-                                            class="form-control inputtags">
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Position</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="position" value="{{ $staffs->position }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric">
-                                            <option>Publish</option>
-                                            <option>Draft</option>
-                                            <option>Pending</option>
-                                        </select>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Position En</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="position_en" value="{{ $staffs->position_en }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-primary">Create Post</button>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Specialist</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="specialist" value="{{ $staffs->specialist }}">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description En</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="summernote-simple" name="description_en">{{ $staffs->description_en }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="summernote-simple" name="description">{{ $staffs->description }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div id="image-preview"
+                                                class="image-preview" style="background-image: url('https://cms.kftd.co.id/storage/images/staff/{{ $staffs->image_name }}');
+                                                        background-size: cover; background-position: center center;">
+                                                <label for="image-upload"
+                                                    id="image-label">Choose File</label>
+                                                <input type="file"
+                                                    name="image"
+                                                    id="image-upload" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Grup</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text"
+                                                class="form-control" name="grup" value="{{ $staffs->grup }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

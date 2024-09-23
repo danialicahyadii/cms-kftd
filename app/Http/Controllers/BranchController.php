@@ -12,7 +12,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branch = Branch::paginate(10);
+        $branch = Branch::orderBy('soffice', 'desc')->paginate(10);
+        confirmDelete('Delete Branch!', "Are you sure you want to delete?");
         return view('apps.branch.index', ['type_menu' => 'branch', 'branch' => $branch]);
     }
 
@@ -29,7 +30,26 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $imageName = $request->image ?? null;
+
+        if($imageName){
+            $imageName = $request->image->getClientOriginalName();
+            $request->image->storeAs('branch', $imageName, 'public');
+        }
+        Branch::create([
+            'soffice' => $request->soffice,
+            'soffice_desc' => $request->soffice_desc,
+            'alamat' => $request->alamat,
+            'image' => $imageName ?? '-',
+            'no_telp' => $request->no_telp,
+            'branch_manager' => $request->branch_manager,
+            'email' => $request->email,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'gmaps_link' => $request->gmaps_link
+        ]);
+
+        return redirect()->route('branch.index');
     }
 
     /**
@@ -45,7 +65,7 @@ class BranchController extends Controller
      */
     public function edit(Branch $branch)
     {
-        return view('apps.branch.edit', ['type_menu' => 'branch']);
+        return view('apps.branch.edit', ['type_menu' => 'branch', 'branch' => $branch]);
     }
 
     /**
@@ -53,7 +73,26 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        $imageName = $request->image ?? null;
+
+        if($imageName){
+            $imageName = $request->image->getClientOriginalName();
+            $request->image->storeAs('branch', $imageName, 'public');
+        }
+        $branch->update([
+            'soffice' => $request->soffice ?? $branch->soffice,
+            'soffice_desc' => $request->soffice_desc ?? $branch->soffice_desc,
+            'alamat' => $request->alamat ?? $branch->alamat,
+            'image' => $imageName ?? $branch->image,
+            'no_telp' => $request->no_telp ?? $branch->no_telp,
+            'branch_manager' => $request->branch_manager ?? $branch->branch_manager,
+            'email' => $request->email ?? $branch->email,
+            'longitude' => $request->longitude ?? $branch->longitude,
+            'latitude' => $request->latitude ?? $branch->latitude,
+            'gmaps_link' => $request->gmaps_link ?? $branch->gmaps_link
+        ]);
+
+        return redirect()->route('branch.index');
     }
 
     /**
@@ -61,6 +100,8 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
-        //
+        $branch->delete();
+        toast($branch->soffice_desc.' was deleted!','success');
+        return redirect()->back();
     }
 }

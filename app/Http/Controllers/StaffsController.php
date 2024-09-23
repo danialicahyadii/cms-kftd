@@ -12,7 +12,9 @@ class StaffsController extends Controller
      */
     public function index()
     {
-        return view('apps.staffs.index', ['type_menu' => 'staffs']);
+        $staffs = Staffs::paginate(10);
+        confirmDelete('Delete Staffs!', "Are you sure you want to delete?");
+        return view('apps.staffs.index', ['type_menu' => 'staffs', 'staffs' => $staffs]);
     }
 
     /**
@@ -28,7 +30,24 @@ class StaffsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $imagePath = $request->image->storeAs('staffs', $imageName, 'public');
+            $imageUrl = asset('storage/' . $imagePath);
+        }
+        Staffs::create([
+            'name' => $request->name,
+            'position' => $request->position,
+            'position_en' => $request->position_en,
+            'specialist' => $request->specialist,
+            'description' => $request->description,
+            'description_en' => $request->description_en,
+            'image_name' => $imageName ?? '-',
+            'image_url' => $imageUrl ?? '-',
+            'grup' => $request->grup ?? '-'
+        ]);
+
+        return redirect('staffs');
     }
 
     /**
@@ -42,24 +61,46 @@ class StaffsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Staffs $staffs)
+    public function edit($id)
     {
-        //
+        $staffs = Staffs::find($id);
+        return view('apps.staffs.edit', ['type_menu' => 'staffs', 'staffs' => $staffs]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Staffs $staffs)
+    public function update(Request $request, $id)
     {
-        //
+        $staffs = Staffs::find($id);
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $imagePath = $request->image->storeAs('staffs', $imageName, 'public');
+            $imageUrl = asset('storage/' . $imagePath);
+        }
+        $staffs->update([
+            'name' => $request->name,
+            'position' => $request->position,
+            'position_en' => $request->position_en,
+            'specialist' => $request->specialist,
+            'description' => $request->description,
+            'description_en' => $request->description_en,
+            'image_name' => $imageName ?? $staffs->image_name,
+            'image_url' => $imageUrl ?? $staffs->image_url,
+            'grup' => $request->grup ?? '-'
+        ]);
+
+        return redirect('staffs');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Staffs $staffs)
+    public function destroy($id)
     {
-        //
+        $staffs = Staffs::find($id);
+        $staffs->delete();
+        toast($staffs->name.' was deleted!','success');
+        return redirect('staffs');
     }
 }

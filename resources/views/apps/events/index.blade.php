@@ -6,22 +6,15 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet"
         href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.min.css" >
 @endpush
 
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>{{ ucwords($type_menu) }}</h1>
-                <div class="section-header-button">
+            @include('components.breadcrumb-index')
 
-                </div>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">{{ ucwords($type_menu) }}</a></div>
-                    <div class="breadcrumb-item">All {{ ucwords($type_menu) }}</div>
-                </div>
-            </div>
             <div class="section-body">
                 <h2 class="section-title">{{ ucwords($type_menu) }}</h2>
                 <p class="section-lead">
@@ -87,16 +80,10 @@
                                                 </td>
                                                 <td>{{ $row->title }}
                                                     <div class="table-links">
-                                                        <a href="{{ route('events.show', $row->id) }}">View</a>
-                                                        <div class="bullet"></div>
                                                         <a href="{{ route('events.edit', $row->id) }}">Edit</a>
                                                         <div class="bullet"></div>
-                                                        <a class="text-danger delete-link" style="cursor:pointer"
-                                                        data-id="{{ $row->id }}">Delete</a>
-                                                        <form method="POST" id="delete-form{{ $row->id }}" action="{{ route('events.delete', $row->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
+                                                        <a href="{{ route('events.destroy', $row->id) }}"
+                                                            class="text-danger" data-confirm-delete="true">Trash</a>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -104,9 +91,7 @@
                                                     <a href="#">{{ \Carbon\Carbon::parse($row->end_event)->translatedFormat('l, d F Y') }}</a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ $row->image_url }}" target="_blank">
-                                                        <img alt="image" class="mr-3 m-2 rounded" width="100" src="{{ $row->image_url }}">
-                                                    </a>
+                                                    <img alt="image" style="cursor: pointer;" class="mr-3 m-2 rounded show-link" width="100" src="{{ $row->image_url }}">
                                                 </td>
                                                 <td>{{ $row->created_at->diffForHumans() }}</td>
                                             </tr>
@@ -186,15 +171,22 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.delete-link').on('click', function(e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                var form = $('#delete-form' + id);
-                form.submit();
-            });
+            $('.show-link').on('click', function(e){
+                var src = $(this).attr('src');
+                console.log(src);
+                Swal.fire({
+                    title: false,
+                    text: false,
+                    imageUrl: src,
+                    imageWidth: false,
+                    imageHeight: false,
+                    showConfirmButton: false,
+                    });
+
+            })
         });
     </script>
 @endpush

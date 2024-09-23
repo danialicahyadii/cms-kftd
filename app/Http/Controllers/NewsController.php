@@ -12,7 +12,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::paginate(10);
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
+        confirmDelete('Delete News!', "Are you sure you want to delete?");
         return view('apps.news.index', ['type_menu' => 'news', 'news' => $news]);
     }
 
@@ -29,7 +30,30 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $imagePath = $request->image->storeAs('events', $imageName, 'public');
+            $imageUrl = asset('storage/' . $imagePath);
+
+        }
+        $news = News::create([
+            "title" => $request->title,
+            "slug" => $request->slug,
+            "image_name" => $imageName ?? null,
+            "image_url" => $imageUrl ?? null,
+            "content" => $request->content,
+            "title_en" => $request->title_en,
+            "slug_en" => $request->slug_en,
+            "image_name_en" => $imageName ?? null,
+            "image_url_en" => $imageUrl ?? null,
+            "content_en" => $request->content_en,
+            "meta_title" => $request->meta_title,
+            "meta_keywords" => $request->meta_keywords,
+            "meta_description" => $request->meta_description,
+        ]);
+
+        return redirect('news');
     }
 
     /**
@@ -45,7 +69,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        return view('apps.news.edit', ['type_menu' => 'news', 'news' => $news]);
     }
 
     /**
@@ -53,7 +77,29 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $imagePath = $request->image->storeAs('news', $imageName, 'public');
+            $imageUrl = asset('storage/' . $imagePath);
+
+        }
+        $news->update([
+            "title" => $request->title,
+            "slug" => $request->slug,
+            "image_name" => $imageName ?? $news->image_name,
+            "image_url" => $imageUrl ?? $news->image_url,
+            "content" => $request->content,
+            "title_en" => $request->title_en,
+            "slug_en" => $request->slug_en,
+            "image_name_en" => $imageName ?? $news->image_name_en,
+            "image_url_en" => $imageUrl ?? $news->image_url_en,
+            "content_en" => $request->content_en,
+            "meta_title" => $request->meta_title,
+            "meta_keywords" => $request->meta_keywords,
+            "meta_description" => $request->meta_description,
+        ]);
+
+        return redirect('news');
     }
 
     /**
@@ -61,6 +107,8 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        $news->delete();
+        toast($news->name.' was deleted!','success');
+        return redirect('news');
     }
 }

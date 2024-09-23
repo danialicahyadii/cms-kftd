@@ -12,7 +12,8 @@ class PrincipalController extends Controller
      */
     public function index()
     {
-        $principal = Principal::paginate(10);
+        $principal = Principal::orderBy('id', 'desc')->paginate(10);
+        confirmDelete('Delete Principal!', "Are you sure you want to delete?");
         return view('apps.principal.index', ['type_menu' => 'principal', 'principal' => $principal]);
     }
 
@@ -29,7 +30,17 @@ class PrincipalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $request->image->storeAs('principal', $imageName, 'public');
+        }
+        Principal::create([
+            'name_principal' => $request->name_principal,
+            'image' => $imageName ?? null,
+            'lini' => $request->lini
+        ]);
+
+        return redirect('principal');
     }
 
     /**
@@ -45,7 +56,7 @@ class PrincipalController extends Controller
      */
     public function edit(Principal $principal)
     {
-        //
+        return view('apps.principal.edit', ['type_menu' => 'principal', 'principal' => $principal]);
     }
 
     /**
@@ -53,7 +64,17 @@ class PrincipalController extends Controller
      */
     public function update(Request $request, Principal $principal)
     {
-        //
+        if($request->hasFile('image')){
+            $imageName = $request->image->getClientOriginalName();
+            $request->image->storeAs('principal', $imageName, 'public');
+        }
+        $principal->update([
+            'name_principal' => $request->name_principal,
+            'image' => $imageName ?? $principal->image,
+            'lini' => $request->lini
+        ]);
+
+        return redirect('principal');
     }
 
     /**
@@ -61,6 +82,8 @@ class PrincipalController extends Controller
      */
     public function destroy(Principal $principal)
     {
-        //
+        $principal->delete();
+        toast($principal->name_principal.' was deleted!','success');
+        return redirect('principal');
     }
 }

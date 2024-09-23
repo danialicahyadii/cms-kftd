@@ -9,4 +9,8 @@ class Principal extends Model
 {
     use HasFactory;
     protected $table = 'principal';
+
+    protected $guarded = [];
+
+    public $timestamps = false;
 }

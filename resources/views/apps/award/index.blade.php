@@ -11,14 +11,8 @@
 @section('main')
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>{{ $type_menu }}</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">{{ $type_menu }}</a></div>
-                    <div class="breadcrumb-item">All {{ $type_menu }}</div>
-                </div>
-            </div>
+            @include('components.breadcrumb-index')
+
             <div class="section-body">
                 <h2 class="section-title">{{ $type_menu }}</h2>
                 <p class="section-lead">
@@ -84,26 +78,19 @@
                                                 </td>
                                                 <td><div title="{{ $row->nama_award }}">{{ Str::limit($row->nama_award, 30) }}</div>
                                                     <div class="table-links">
-                                                        <a href="#">View</a>
-                                                        <div class="bullet"></div>
                                                         <a href="{{ route('award.edit', $row->id) }}">Edit</a>
                                                         <div class="bullet"></div>
-                                                        <a href="#"
-                                                            class="text-danger">Trash</a>
+                                                        <a class="text-danger" href="{{ route('award.destroy', $row->id) }}" data-confirm-delete="true">Delete</a>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     {{ Str::limit($row->nama_award_en, 30) }}
                                                 </td>
                                                 <td>
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="100" height="50" src="{{ asset('img/products/product-3-50.png') }}">
-                                                    </a>
+                                                    <img alt="image" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award }}">
                                                 </td>
                                                 <td>
-                                                    <a href="#">
-                                                        <img alt="image" class="mr-3 rounded" width="100" height="50" src="{{ asset('img/products/product-3-50.png') }}">
-                                                    </a>
+                                                    <img alt="image" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award_show }}">
                                                 </td>
                                                 <td>{{ $row->date_award }}</td>
                                             </tr>
@@ -183,5 +170,4 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>
-
 @endpush

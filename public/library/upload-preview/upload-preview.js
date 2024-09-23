@@ -56,9 +56,12 @@
                                             "' />Your browser does not support the audio element.</audio>"
                                     );
                                 } else {
-                                    alert(
-                                        "This file type is not supported yet."
-                                    );
+                                    swal({
+                                        icon: "error",
+                                        text: "File Tidak Support",
+                                        buttons: false,
+                                        timer: 2000,
+                                      });
                                 }
                             });
 
