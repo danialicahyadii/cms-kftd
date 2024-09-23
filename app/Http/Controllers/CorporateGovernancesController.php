@@ -44,7 +44,7 @@ class CorporateGovernancesController extends Controller
         CorporateGovernances::create([
             'title' => $request->title,
             'title_en' => $request->title_en,
-            'content' => $request->content,
+            'content' => $request->content_id,
             'content_en' => $request->content_en,
             'filename' => $fileName ?? null,
             'file_link' => $fileLink ?? null,
@@ -92,7 +92,7 @@ class CorporateGovernancesController extends Controller
         $corporateGovernances->update([
             'title' => $request->title,
             'title_en' => $request->title_en,
-            'content' => $request->content,
+            'content' => $request->content_id,
             'content_en' => $request->content_en,
             'filename' => $fileName ?? $corporateGovernances->filename,
             'file_link' => $fileLink ?? $corporateGovernances->file_link,
