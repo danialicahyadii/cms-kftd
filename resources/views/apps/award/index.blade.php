@@ -87,10 +87,10 @@
                                                     {{ Str::limit($row->nama_award_en, 30) }}
                                                 </td>
                                                 <td>
-                                                    <img alt="image" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award }}">
+                                                    <img alt="image" style="cursor: pointer;" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award }}">
                                                 </td>
                                                 <td>
-                                                    <img alt="image" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award_show }}">
+                                                    <img alt="image" style="cursor: pointer;" class="mr-3 rounded show-link" width="100" src="https://kftd.co.id/assets/img/content/{{ $row->image_award_show }}">
                                                 </td>
                                                 <td>{{ $row->date_award }}</td>
                                             </tr>
