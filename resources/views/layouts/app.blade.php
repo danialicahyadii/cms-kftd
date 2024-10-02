@@ -84,7 +84,6 @@
         $(document).ready(function() {
             $('.show-link').on('click', function(e){
                 var src = $(this).attr('src');
-                console.log(src);
                 Swal.fire({
                     title: false,
                     text: false,

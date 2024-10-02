@@ -13,6 +13,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffsController;
+use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,8 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::post('product-export', [ProductController::class, 'export'])->name('product.export');
+    Route::get('search/{param}', [DashboardController::class, 'search']);
     Route::resources([
         '/' => DashboardController::class,
         'award' => AwardController::class,

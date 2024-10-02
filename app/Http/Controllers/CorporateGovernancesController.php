@@ -37,7 +37,7 @@ class CorporateGovernancesController extends Controller
 
         if($file){
             $fileName = $file->getClientOriginalName();
-            $filePath = $file->storeAs('corporate-governances', $fileName, 'public');
+            $filePath = $file->storeAs('files/corporate-governances', $fileName, 'public');
             $fileLink = asset('storage/' . $filePath);
         }
 
@@ -81,11 +81,11 @@ class CorporateGovernancesController extends Controller
 
         if($request->file('file')){
             $file = $request->file('file');
-            if ($corporateGovernances->filename && Storage::disk('public')->exists('corporate-governances/' . $corporateGovernances->filename)) {
+            if ($corporateGovernances->filename && Storage::disk('public')->exists('files/corporate-governances/' . $corporateGovernances->filename)) {
                 Storage::disk('public')->delete('corporate-governances/' . $corporateGovernances->filename);
             }
             $fileName = $file->getClientOriginalName();
-            $filePath = $file->storeAs('corporate-governances', $fileName, 'public');
+            $filePath = $file->storeAs('files/corporate-governances', $fileName, 'public');
             $fileLink = asset('storage/' . $filePath);
         }
 

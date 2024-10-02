@@ -34,7 +34,7 @@ class BranchController extends Controller
 
         if($imageName){
             $imageName = $request->image->getClientOriginalName();
-            $request->image->storeAs('branch', $imageName, 'public');
+            $request->image->storeAs('images/branch', $imageName, 'public');
         }
         Branch::create([
             'soffice' => $request->soffice,
@@ -77,7 +77,7 @@ class BranchController extends Controller
 
         if($imageName){
             $imageName = $request->image->getClientOriginalName();
-            $request->image->storeAs('branch', $imageName, 'public');
+            $request->image->storeAs('images/branch', $imageName, 'public');
         }
         $branch->update([
             'soffice' => $request->soffice ?? $branch->soffice,

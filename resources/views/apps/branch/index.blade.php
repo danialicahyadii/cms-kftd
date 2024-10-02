@@ -60,9 +60,12 @@
                                                 </div>
                                             </th>
                                             <th>Sales Office</th>
+                                            <th>Sales Office Desc</th>
                                             <th>Alamat</th>
-                                            <th>Branch Manager</th>
+                                            <th width="20">Branch Manager</th>
                                             <th>No Telp</th>
+                                            <th>Email</th>
+                                            <th>Image</th>
                                         </tr>
                                         @foreach ($branch as $row)
                                             <tr>
@@ -76,6 +79,7 @@
                                                             class="custom-control-label">&nbsp;</label>
                                                     </div>
                                                 </td>
+                                                <td>{{ $row->soffice }}</td>
                                                 <td>{{ $row->soffice_desc }}
                                                     <div class="table-links">
                                                         <a href="{{ route('branch.edit', $row->soffice) }}">Edit</a>
@@ -90,6 +94,8 @@
                                                     {{ $row->branch_manager }}
                                                 </td>
                                                 <td>{{ $row->no_telp }}</td>
+                                                <td>{{ $row->email }}</td>
+                                                <td><img class="mr-3 rounded show-link" style="cursor: pointer;" width="100" height="50" src="https://kftd.co.id/assets/img/branch/{{ str_replace(' ', '%20', $row->image) }}" alt=""></td>
                                             </tr>
                                         @endforeach
                                     </table>

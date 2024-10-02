@@ -36,7 +36,7 @@ class BannersController extends Controller
 
         if ($request->hasFile('image_name')) {
             $name = $request->image_name->getClientOriginalName();
-            $image = $request->image_name->storeAs('banners', $name, 'public');
+            $image = $request->image_name->storeAs('images/banners', $name, 'public');
             $imageUrl = asset('storage/' . $image);
         }
         Banners::create([
@@ -84,7 +84,7 @@ class BannersController extends Controller
                 Storage::disk('public')->delete($banners->image_name);
             }
             $name = $request->image_name->getClientOriginalName();
-            $image = $request->image_name->storeAs('banners', $name, 'public');
+            $image = $request->image_name->storeAs('images/banners', $name, 'public');
             $imageUrl = asset('storage/' . $image);
         }
 
@@ -99,7 +99,7 @@ class BannersController extends Controller
             'url_tag' => $request->url_tag ?? '-'
         ]);
 
-        return redirect()->route('banners.index');
+        return redirect('banners');
     }
 
     /**

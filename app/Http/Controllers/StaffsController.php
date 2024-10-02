@@ -32,7 +32,7 @@ class StaffsController extends Controller
     {
         if($request->hasFile('image')){
             $imageName = $request->image->getClientOriginalName();
-            $imagePath = $request->image->storeAs('staffs', $imageName, 'public');
+            $imagePath = $request->image->storeAs('images/staffs', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
         }
         Staffs::create([
@@ -75,7 +75,7 @@ class StaffsController extends Controller
         $staffs = Staffs::find($id);
         if($request->hasFile('image')){
             $imageName = $request->image->getClientOriginalName();
-            $imagePath = $request->image->storeAs('staffs', $imageName, 'public');
+            $imagePath = $request->image->storeAs('images/staffs', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
         }
         $staffs->update([

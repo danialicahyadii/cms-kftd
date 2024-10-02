@@ -60,8 +60,8 @@
                                                 </div>
                                             </th>
                                             <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Author</th>
+                                            <th>slug</th>
+                                            <th>Image</th>
                                             <th>Created At</th>
                                         </tr>
                                         @foreach ($news as $row)

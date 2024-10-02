@@ -36,10 +36,10 @@ class AwardController extends Controller
         $imageAwardShow = $request->image_award_show ?? null;
 
         if($imageAward){
-            $imageAwardPath = $request->file('image_award')->store('awards', 'public');
+            $imageAwardPath = $request->file('image_award')->store('images/awards', 'public');
         }
         if($imageAwardShow){
-            $imageAwardShowPath = $request->file('image_award_show')->store('awards', 'public');
+            $imageAwardShowPath = $request->file('image_award_show')->store('images/awards', 'public');
         }
         Award::create([
             'nama_award' => $request->nama_award,
@@ -79,14 +79,14 @@ class AwardController extends Controller
             if ($award->image_award && Storage::disk('public')->exists($award->image_award)) {
                 Storage::disk('public')->delete($award->image_award);
             }
-            $imageAwardPath = $request->file('image')->store('awards', 'public');
+            $imageAwardPath = $request->file('image')->store('images/awards', 'public');
         }
 
         if ($request->hasFile('image_award_show')) {
             if ($award->image_award_show && Storage::disk('public')->exists($award->image_award_show)) {
                 Storage::disk('public')->delete($award->image_award_show);
             }
-            $imageAwardShowPath = $request->file('image_award_show')->store('awards', 'public');
+            $imageAwardShowPath = $request->file('image_award_show')->store('images/awards', 'public');
         }
 
         // dd($imageAwardPath, $imageAwardShowPath, $request->all());

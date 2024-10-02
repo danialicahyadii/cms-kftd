@@ -36,7 +36,7 @@ class EventsController extends Controller
 
         if($request->hasFile('image')){
             $imageName = $image->getClientOriginalName();
-            $imagePath = $image->storeAs('events', $imageName, 'public');
+            $imagePath = $image->storeAs('images/events', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
         }
 
@@ -86,7 +86,7 @@ class EventsController extends Controller
 
         if($request->hasFile('image')){
             $imageName = $request->image->getClientOriginalName();
-            $imagePath = $request->image->storeAs('events', $imageName, 'public');
+            $imagePath = $request->image->storeAs('images/events', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
         }
 

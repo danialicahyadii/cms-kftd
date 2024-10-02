@@ -6,6 +6,7 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet"
         href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endpush
 
 @section('main')
@@ -28,15 +29,20 @@
                                 <div class="float-left">
                                     <a href="{{ route('product.create') }}"
                                         class="btn btn-primary">Add New</a>
+                                        <button class="btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target="#importExcel">Import Excel</button>
                                 </div>
                                 <div class="float-right">
-                                    <form>
+                                    <form action="{{ url('search', request()->path()) }}" method="GET" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('GET')
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                placeholder="Search">
+                                                placeholder="Search" name="search">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
                                     </form>
@@ -161,6 +167,47 @@
             </div>
         </section>
     </div>
+    <div class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        id="importExcel">
+        <div class="modal-dialog"
+            role="document">
+            <form action="{{ route('product.export') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Upload Excel</h5>
+                        <button type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Upload Date</label>
+                            <input type="date" name="upload_date" class="form-control selector" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload File (Template File untuk <a href="">Upload</a>)</label>
+                            <input type="file" name="fileImport" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit"
+                            class="btn btn-primary">Upload</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
@@ -169,4 +216,18 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        var date = $(".selector").flatpickr({
+            enableTime: false,
+            altFormat: "F j, Y",
+            altInput: true,
+            dateFormat: "Y-m-d",
+            defaultDate: 'today',
+            minDate: 'today',
+            maxDate: 'today',
+            allowInput: false
+        });
+    </script>
+
 @endpush

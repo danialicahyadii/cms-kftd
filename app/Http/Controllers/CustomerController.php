@@ -38,7 +38,7 @@ class CustomerController extends Controller
 
         if($request->hasFile('image')){
             $image = $id.'. '.$request->image->getClientOriginalName();
-            $request->image->storeAs('customer', $image, 'public');
+            $request->image->storeAs('images/customer', $image, 'public');
         }
         Customer::create([
             'name_customer' => $request->name_customer,
@@ -72,7 +72,7 @@ class CustomerController extends Controller
     {
         if($request->hasFile('image')){
             $image = $customer->id.'. '.$request->image->getClientOriginalName();
-            $request->image->storeAs('customer', $image, 'public');
+            $request->image->storeAs('images/customer', $image, 'public');
         }
 
         $customer->update([

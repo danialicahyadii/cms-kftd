@@ -33,7 +33,7 @@ class NewsController extends Controller
         // dd($request->all());
         if($request->hasFile('image')){
             $imageName = $request->image->getClientOriginalName();
-            $imagePath = $request->image->storeAs('events', $imageName, 'public');
+            $imagePath = $request->image->storeAs('images/news', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
 
         }
@@ -79,9 +79,8 @@ class NewsController extends Controller
     {
         if($request->hasFile('image')){
             $imageName = $request->image->getClientOriginalName();
-            $imagePath = $request->image->storeAs('news', $imageName, 'public');
+            $imagePath = $request->image->storeAs('images/news', $imageName, 'public');
             $imageUrl = asset('storage/' . $imagePath);
-
         }
         $news->update([
             "title" => $request->title,

@@ -1,17 +1,17 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html"><img src="{{ asset('img/logo.png') }}" width="140" alt=""></a>
+            <a href="/"><img src="{{ asset('img/logo.png') }}" width="140" alt=""></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html"><img src="{{ asset('img/logo.png') }}" width="40" alt=""></a>
+            <a href="/"><img src="{{ asset('img/logo.png') }}" width="40" alt=""></a>
         </div>
         <ul class="sidebar-menu mt-4">
-            <li class="menu-header">Dashboard</li>
+            {{-- <li class="menu-header">Dashboard</li>
             <li class="{{ Request::is('/') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="{{ url('/') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
-            </li>
+            </li> --}}
             <li class="menu-header">Main Menu</li>
             <li class="{{ Request::is('*award*') ? 'active' : '' }}">
                 <a class="nav-link"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,7 +12,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('apps.adash.dash', ['type_menu' => 'Dashboard']);
+        return view('pages.blank-page', ['type_menu' => 'Dashboard']);
     }
 
     /**
@@ -60,5 +61,13 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function search(Request $request, $param)
+    {
+        if($param == 'product'){
+            $product = Product::where('material', $request->search)->paginate();
+            return view('apps.product.index', ['type_menu' => 'product', 'product' => $product]);
+        }
     }
 }

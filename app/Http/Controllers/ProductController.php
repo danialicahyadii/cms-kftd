@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductImport;
 use App\Models\Categories;
 use App\Models\Principal;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -78,5 +80,12 @@ class ProductController extends Controller
         $product->delete();
         toast($product->name.' was deleted!','success');
         return redirect('product');
+    }
+
+    public function export(Request $request)
+    {
+        $import = new ProductImport();
+        Excel::import($import, $request->file('fileImport'));
+        return redirect('product')->with('success', 'Import Berhasil');
     }
 }
