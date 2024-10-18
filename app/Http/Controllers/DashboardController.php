@@ -12,7 +12,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.blank-page', ['type_menu' => 'Dashboard']);
+        return view('apps.blank-page', ['type_menu' => 'Dashboard']);
     }
 
     /**

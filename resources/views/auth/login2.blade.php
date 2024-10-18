@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
         name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>Login &mdash; CMS</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet"
@@ -15,6 +15,8 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous"
         referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo.png">
+
 
     <!-- CSS Libraries -->
     <link rel="stylesheet"
@@ -25,6 +27,7 @@
         href="{{ asset('css/style.css') }}">
     <link rel="stylesheet"
         href="{{ asset('css/components.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -58,6 +61,11 @@
                                 <div class="invalid-feedback">
                                     Please fill in your email
                                 </div>
+                                @error('email')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
@@ -74,20 +82,21 @@
                                 <div class="invalid-feedback">
                                     Please fill in your password
                                 </div>
+                                @error('password')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
-                            {{-- <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox"
-                                        name="remember"
-                                        class="custom-control-input"
-                                        tabindex="3"
-                                        id="remember-me">
-                                    <label class="custom-control-label"
-                                        for="remember-me">Remember Me</label>
-                                </div>
-                            </div> --}}
-
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                @error('g-recaptcha-response')
+                                    <div class="text-danger" style="font-size: 80%">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="form-group text-right">
                                 {{-- <a href="auth-forgot-password.html"
                                     class="float-left mt-3">
