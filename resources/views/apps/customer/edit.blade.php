@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edit '. ucwords($type_menu))
+@section('title', 'Edit ' . ucwords($type_menu))
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 @endpush
 
 @section('main')
@@ -31,34 +28,34 @@
                                 <h4>Write Your {{ ucwords($type_menu) }}</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('customer.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('customer.update', $customer->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Customer</label>
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama
+                                            Customer</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text"
-                                                class="form-control" name="name_customer" value="{{ $customer->name_customer }}">
+                                            <input type="text" class="form-control" name="name_customer"
+                                                value="{{ $customer->name_customer }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text"
-                                                class="form-control" name="category" value="{{ $customer->category }}">
+                                            <input type="text" class="form-control" name="category"
+                                                value="{{ $customer->category }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <div id="image-preview"
-                                                class="image-preview" style="background-image: url('https://kftd.co.id/assets/img/customer/{{ str_replace(' ', '%20', $customer->image) }}');
+                                            <div id="image-preview" class="image-preview"
+                                                style="background-image: url('https://kftd.co.id/assets/img/customer/{{ str_replace(' ', '%20', $customer->image) }}');
                                                     background-size: cover; background-position: center center;">
-                                                <label for="image-upload"
-                                                    id="image-label">Choose File</label>
-                                                <input type="file"
-                                                    name="image"
-                                                    id="image-upload" />
+                                                <label for="image-upload" id="image-label">Choose File</label>
+                                                <input type="file" name="image" id="image-upload" />
                                             </div>
                                         </div>
                                     </div>

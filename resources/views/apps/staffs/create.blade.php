@@ -37,40 +37,40 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="name">
+                                                class="form-control" name="name" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Position</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="position">
+                                                class="form-control" name="position" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Position En</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="position_en">
+                                                class="form-control" name="position_en" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Specialist</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="specialist">
+                                                class="form-control" name="specialist" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description En</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote-simple" name="description_en"></textarea>
+                                            <textarea class="summernote-simple" name="description_en" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote-simple" name="description"></textarea>
+                                            <textarea class="summernote-simple" name="description" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

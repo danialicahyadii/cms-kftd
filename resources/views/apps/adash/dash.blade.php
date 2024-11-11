@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'General Dashboard')
+@section('title', 'Dashboard')
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/jqvmap/dist/jqvmap.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/jqvmap/dist/jqvmap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
 @endpush
 
 @section('main')
@@ -16,7 +14,53 @@
             <div class="section-header">
                 <h1>Dashboard</h1>
             </div>
-            <div class="row">
+            <div class="card">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-5 col-lg-6 p-3">
+                        <!-- Image -->
+                        <img src="{{ asset('img/file.png') }}" alt="..." class="img-fluid mb-6 mb-md-0">
+                        {{-- <h1 class="fw-bold text-center">CMS</h1> --}}
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-6 p-5">
+                        <!-- Heading -->
+                        <h2>
+                            CMS KFTD: Content Management System Web KFTD.
+                        </h2>
+                        <!-- Text -->
+                        <p class="fs-lg text-gray-700 mb-5">
+                            Merupakan sistem yang memfasilitasi user secara digital yang memungkinkan pengguna untuk
+                            membuat, mengelola, dan menyimpan konten digital seperti teks, gambar, video, dan audio tanpa
+                            harus memiliki pengetahuan teknis yang mendalam tentang pemrograman web.
+                        </p>
+                        <!-- Stats -->
+                        <div class="d-flex">
+                            <div class="col-4">
+                                <h3 class="mb-0">
+                                    <span data-countup="{&quot;startVal&quot;: 0}" data-to="100" data-aos=""
+                                        data-aos-id="countup:in" class="aos-init aos-animate">100</span>%
+                                </h3>
+                                <p class="text-gray-700 mb-0">
+                                    Integrasi
+                                </p>
+                            </div>
+                            <div class="col-2 border-start border-gray-300"></div>
+                            <div class="col-4">
+                                <h3 class="mb-0">
+                                    <span data-countup="{&quot;startVal&quot;: 0}" data-to="24" data-aos=""
+                                        data-aos-id="countup:in" class="aos-init aos-animate">24</span>/
+                                    <span data-countup="{&quot;startVal&quot;: 0}" data-to="7" data-aos=""
+                                        data-aos-id="countup:in" class="aos-init aos-animate">7</span>
+                                </h3>
+                                <p class="text-gray-700 mb-0">
+                                    Realtime
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- / .row -->
+            </div>
+            {{-- <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
@@ -77,8 +121,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div> --}}
+            {{-- <div class="row">
                 <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
@@ -189,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                     <div class="card">

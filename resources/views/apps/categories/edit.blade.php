@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Edit '. ucwords($type_menu))
+@section('title', 'Edit ' . ucwords($type_menu))
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 @endpush
 
 @section('main')
@@ -31,14 +28,15 @@
                                 <h4>Write Your {{ ucwords($type_menu) }}</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('categories.update', $categories->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('categories.update', $categories->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text"
-                                                class="form-control" name="name" value="{{ $categories->name }}">
+                                            <input type="text" class="form-control" name="name"
+                                                value="{{ $categories->name }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

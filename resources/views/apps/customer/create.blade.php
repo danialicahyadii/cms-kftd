@@ -38,14 +38,14 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Customer</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="name_customer">
+                                                class="form-control" name="name_customer" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="category">
+                                                class="form-control" name="category" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

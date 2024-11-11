@@ -38,27 +38,27 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Material</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="material">
+                                                class="form-control" name="material" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Text Material</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="text_material">
+                                                class="form-control" name="text_material" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Base UOM</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="baseuom">
+                                                class="form-control" name="baseuom" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Prinsipal</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="prinsipal">
+                                            <select class="form-control selectric" name="prinsipal" required>
                                                 <option value="" selected disabled>SELECT</option>
                                                 @foreach ($principal as $row)
                                                     <option value="{{ $row->name_principal }}">{{ $row->name_principal }}</option>
@@ -69,7 +69,7 @@
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lini</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="lini">
+                                            <select class="form-control selectric" name="lini" required>
                                                 <option value="" selected disabled>SELECT</option>
                                                 @foreach ($linis as $row)
                                                     <option value="{{ $row->name }}">{{ $row->name }}</option>

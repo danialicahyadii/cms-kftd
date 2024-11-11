@@ -4,12 +4,9 @@
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 @endpush
 
 @section('main')
@@ -31,39 +28,44 @@
                                 <h4>Write Your Post</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('principal.update', $principal->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('principal.update', $principal->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name Principal</label>
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name
+                                            Principal</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text"
-                                                class="form-control" name="name_principal" value="{{ $principal->name_principal }}">
+                                            <input type="text" class="form-control" name="name_principal"
+                                                value="{{ $principal->name_principal }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lini</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="lini">
-                                                <option value="" {{ empty($principal->lini) ? 'selected' : '' }} disabled>SELECT</option>
-                                                <option value="NON FARMA" {{ $principal->lini === 'NON FARMA' ? 'selected' : '' }}>NON FARMA</option>
-                                                <option value="ALKES" {{ $principal->lini === 'ALKES' ? 'selected' : '' }}>ALKES</option>
-                                                <option value="FARMA" {{ $principal->lini === 'FARMA' ? 'selected' : '' }}>FARMA</option>
-                                                <option value="BUMN" {{ $principal->lini === 'BUMN' ? 'selected' : '' }}>BUMN</option>
+                                            <select class="form-control selectric" name="lini" required>
+                                                <option value="" {{ empty($principal->lini) ? 'selected' : '' }}
+                                                    disabled>SELECT</option>
+                                                <option value="NON FARMA"
+                                                    {{ $principal->lini === 'NON FARMA' ? 'selected' : '' }}>NON FARMA
+                                                </option>
+                                                <option value="ALKES" {{ $principal->lini === 'ALKES' ? 'selected' : '' }}>
+                                                    ALKES</option>
+                                                <option value="FARMA" {{ $principal->lini === 'FARMA' ? 'selected' : '' }}>
+                                                    FARMA</option>
+                                                <option value="BUMN" {{ $principal->lini === 'BUMN' ? 'selected' : '' }}>
+                                                    BUMN</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <div id="image-preview"
-                                                class="image-preview" style="background-image: url('https://kftd.co.id/assets/img/principal/{{ str_replace(' ', '%20', $principal->image) }}');
+                                            <div id="image-preview" class="image-preview"
+                                                style="background-image: url('https://kftd.co.id/assets/img/principal/{{ str_replace(' ', '%20', $principal->image) }}');
                                                     background-size: cover; background-position: center center;">
-                                                <label for="image-upload"
-                                                    id="image-label">Choose File</label>
-                                                <input type="file"
-                                                    name="image"
-                                                    id="image-upload" />
+                                                <label for="image-upload" id="image-label">Choose File</label>
+                                                <input type="file" name="image" id="image-upload" />
                                             </div>
                                         </div>
                                     </div>

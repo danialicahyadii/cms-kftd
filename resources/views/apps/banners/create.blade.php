@@ -38,28 +38,28 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Big Title</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="big_title">
+                                                class="form-control" name="big_title" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Small Title</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="small_title">
+                                                class="form-control" name="small_title" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Big Title En</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="big_title_en">
+                                                class="form-control" name="big_title_en" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Small Title En</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="small_title_en">
+                                                class="form-control" name="small_title_en" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

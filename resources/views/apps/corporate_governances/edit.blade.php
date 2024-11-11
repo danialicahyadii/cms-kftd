@@ -38,26 +38,26 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="title" value="{{ $corporateGovernances->title }}">
+                                                class="form-control" name="title" value="{{ $corporateGovernances->title }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title En</label>
                                         <div class="col-sm-12 col-md-7">
                                             <input type="text"
-                                                class="form-control" name="title_en" value="{{ $corporateGovernances->title_en }}">
+                                                class="form-control" name="title_en" value="{{ $corporateGovernances->title_en }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote-simple" name="content_id">{{ $corporateGovernances->content }}</textarea>
+                                            <textarea class="summernote-simple" name="content_id" required>{{ $corporateGovernances->content }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content En</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote-simple" name="content_en">{{ $corporateGovernances->content_en }}</textarea>
+                                            <textarea class="summernote-simple" name="content_en" required>{{ $corporateGovernances->content_en }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
